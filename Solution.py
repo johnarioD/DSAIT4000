@@ -24,8 +24,8 @@ class DataSet():
 		self.y = y
 
 
+# This can be used to load the dataset
 def load_clean_data():
-	# This can be used to load the dataset
 	data = pd.read_csv("./adult.csv", header=1, na_values='?')
 
 	if INFO:
@@ -120,7 +120,7 @@ def perturb( y, mn=10, mx=100 ):
 		mn = tmp
 	elif mn == mx:
 		mx += 1
-	
+
 	print( f"New range {mn} - {mx}" )
 	y = minmax_scale( y, feature_range=( mn, mx ) )
 	return y
@@ -159,7 +159,7 @@ if __name__ == '__main__':
 		'tree': { 'model': DecisionTreeClassifier(), 'train_conf': None, 'test_conf': None },
 		'qda': { 'model': QuadraticDiscriminantAnalysis(), 'train_conf': None, 'test_conf': None }
 	}
-	
+
 	#Undo One-Hot for sklearn
 	#train.y = np.argmax(train.y, axis=1)
 	#test.y = np.argmax(test.y, axis=1)
@@ -168,14 +168,14 @@ if __name__ == '__main__':
 	print( f"--------------------------------------" )
 	train_eval( train, test, classifiers )
 	#visualize( train, classifiers['svc']['model'] )
-	
+
 	print( f"\n\nTraining on FLIPPED datasets" )
 	print( f"--------------------------------------" )
 	for fraction in range( 1, 7, 2 ):
 		print( f"Fraction: {fraction/10}" )
 		error_train = DataSet( train.X, add_errors( train.y, fraction=fraction/10 ) )
 		train_eval( error_train, test, classifiers )
-	
+
 	print( f"\n\nTraining on PERTURBED datasets" )
 	print( f"--------------------------------------" )
 	for _ in range( 5 ):
