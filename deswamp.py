@@ -15,7 +15,7 @@ delimiter_map = {
     "table_7.csv": ",",
     "table_8.csv": ",",
     "table_9.csv": ",",
-    "table_10.csv": "_",  # combi of , and _
+    "table_10.csv": "_",
     "table_11.csv": "_",
     "table_12.csv": ",",
     "table_13.csv": "\t",
@@ -25,6 +25,7 @@ delimiter_map = {
     "table_17.csv": ",",
     "table_18.csv": "_",
     "table_19.csv": ","}
+
 
 #list of all 19 tables
 csv_files = [f for f in os.listdir(folder_path) if f.endswith(".csv")]
@@ -77,9 +78,9 @@ for (file1, df1), (file2, df2) in combinations(dataframes.items(), 2):
                 print(f"   {file2} → {col2}\n")
 
 
-
-
-
+#next steps:
+#a few columns overlap completely: join
+#all columns overlap a bit: union
 
 
 def discovery_algorithm():
