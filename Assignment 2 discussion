@@ -1,0 +1,22 @@
+Assignment:
+Different aspects of the data can effect the data discovery process.
+Write a short report on your findings. Such as which data quality issues had the largest effect on data discovery.
+Which data quality problem was repairable and how you choose to do the repair.
+
+
+Answer:
+The aspects of the data that most influenced our data discovery process are defined below:
+
+1. different deliminators
+The CSV files in our data lake used different delimiters. We fixed this by writing a delimiter discovery function. This function analyzes both the number of non-alphanumeric characters in each row of the table and the variance of these counts across rows. The character with the highest ratio of frequency to variance (+ a small constant 𝜖) emerges as the most likely delimiter. This approach successfully fixed this issue.
+
+2. Data tables with different length rows
+When some rows in a dataset have different lengths than others, comparison of datasets becomes difficlt. To address this, NaN values are added to the shorter rows to fill in the missing data and match the length of the longest row.
+
+3. columns of all zeroes
+When rows contain only zeros, any comparison function treats them as identical, even though they likely represent different data. Therefore, these rows are ignored.
+nulls nans
+
+4. Large size of data
+Another problem we encountered was the large size of out datasets, especially table 14 was large. To still be able to do data discovery we used the computationally efficient Lazo as well as Silkmoth.
+
